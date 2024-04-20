@@ -16,7 +16,7 @@ export interface IGig extends Document {
   organizer: { _id: string; firtsName: string; lastName?: string }; //
 }
 
-const GigSchema = new Schema({
+const EventSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String },
   location: { type: String },
@@ -31,6 +31,6 @@ const GigSchema = new Schema({
   organizer: { type: Schema.Types.ObjectId, ref: "User" },
 });
 
-const Gig = models.Gig || model("Gig", GigSchema);
+const Event = models.Event || model("Event", EventSchema);
 
-export default Gig;
+export default Event;
