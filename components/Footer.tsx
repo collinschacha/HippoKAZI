@@ -8,10 +8,10 @@ const Footer = () => {
         <Link href="/">
           <Icons.logo className="w-10 h-10" />
         </Link>
+        <p className="text-muted-foreground">
+          2024 HippoKAZI. All rights reserved
+        </p>
       </div>
-      <p className="text-muted-foreground">
-        2024 HippoKAZI. All rights reserved
-      </p>
     </footer>
   );
 };
