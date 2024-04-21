@@ -25,7 +25,6 @@ const EventSchema = new Schema({
 
   price: { type: String },
 
-  url: { type: String },
   category: { type: Schema.Types.ObjectId, ref: "Category" },
   organizer: { type: Schema.Types.ObjectId, ref: "User" },
 });

@@ -26,8 +26,6 @@ export type CreateEventParams = {
 
     categoryId: string;
     price: string;
-
-    url: string;
   };
   path: string;
 };
