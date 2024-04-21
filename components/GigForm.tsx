@@ -37,7 +37,6 @@ const GigForm = ({ userId, type }: GigFormProps) => {
     imageUrl: "",
     categoryId: "",
     price: "",
-    url: "",
   };
 
   const { startUpload } = useUploadThing("imageUploader");
@@ -183,27 +182,6 @@ const GigForm = ({ userId, type }: GigFormProps) => {
                     <Input
                       type="number"
                       placeholder="Price"
-                      {...field}
-                      className="input-field"
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <div className="flex flex-col gap-5 md:flex-row ">
-          <FormField
-            control={form.control}
-            name="url"
-            render={({ field }) => (
-              <FormItem className="w-full ">
-                <FormControl>
-                  <div>
-                    <Input
-                      placeholder="Url"
                       {...field}
                       className="input-field"
                     />
