@@ -41,8 +41,6 @@ export type UpdateEventParams = {
 
     categoryId: string;
     price: string;
-
-    url: string;
   };
   path: string;
 };

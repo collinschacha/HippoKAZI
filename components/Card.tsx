@@ -3,6 +3,8 @@ import { auth } from "@clerk/nextjs";
 import { ArrowBigLeft, EditIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { DeleteConfirmation } from "./DeleteConfirmation";
+import { Gideon_Roman } from "next/font/google";
 
 type CardProps = {
   gig: any;
@@ -28,13 +30,11 @@ const Card = ({ gig, hasOrderLink, hidePrice }: CardProps) => {
           <Link href={`/gigs/create/${gig._id}/update`}>
             <EditIcon width={20} height={20} />
           </Link>
+          <DeleteConfirmation eventId={gig._id} />
         </div>
       )}
 
-      <Link
-        href={`/gigs/${gig._id}`}
-        className="flex min-h-[240px] flex-col gap-3 p-5 md:gap-4"
-      >
+      <div className="flex min-h-[240px] flex-col gap-3 p-5 md:gap-4">
         {!hidePrice && (
           <div className="flex gap-2 ">
             <span className="p-semibold-14 w-min rounded-full bg-green-100 px-4 py-1 text-green-500 text-center">
@@ -45,8 +45,9 @@ const Card = ({ gig, hasOrderLink, hidePrice }: CardProps) => {
             </p>
           </div>
         )}
-
-        <p className="p-bold text-gray-600 text-2xl font-bold">{gig.title}</p>
+        <Link href={`/gigs/${gig._id}`}>
+          <p className="p-bold text-gray-600 text-2xl font-bold">{gig.title}</p>
+        </Link>
 
         <div className="flex-between w-full  ">
           <p className="p-medium-14 md:p-medium-16   text-gray-700 p-bold text-lg font-bold">
@@ -59,7 +60,7 @@ const Card = ({ gig, hasOrderLink, hidePrice }: CardProps) => {
             </Link>
           )}
         </div>
-      </Link>
+      </div>
     </div>
   );
 };

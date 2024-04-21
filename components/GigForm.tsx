@@ -20,24 +20,29 @@ import { Textarea } from "./ui/textarea";
 import { FileUploader } from "./FileUploader";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createEvent } from "@/lib/actions/event.action";
+import { createEvent, updateEvent } from "@/lib/actions/event.action";
 
 type GigFormProps = {
   userId: string;
   type: "Create" | "Update";
+  event?: any;
+  eventId?: string;
 };
 
-const GigForm = ({ userId, type }: GigFormProps) => {
+const GigForm = ({ userId, type, event, eventId }: GigFormProps) => {
   const [files, setFiles] = useState<File[]>([]);
   const router = useRouter();
-  const initialValues = {
-    title: "",
-    description: "",
-    location: "",
-    imageUrl: "",
-    categoryId: "",
-    price: "",
-  };
+  const initialValues =
+    event && type === "Update"
+      ? event
+      : {
+          title: "",
+          description: "",
+          location: "",
+          imageUrl: "",
+          categoryId: "",
+          price: "",
+        };
 
   const { startUpload } = useUploadThing("imageUploader");
 
@@ -70,6 +75,28 @@ const GigForm = ({ userId, type }: GigFormProps) => {
         if (newEvent) {
           form.reset();
           router.push(`/gigs/${newEvent._id}`);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    if (type === "Update") {
+      if (!eventId) {
+        router.back();
+        return;
+      }
+
+      try {
+        const updatedEvent = await updateEvent({
+          event: { ...values, imageUrl: uploadedImageUrl, _id: eventId },
+          userId: userId,
+          path: `/gigs/${eventId}`,
+        });
+
+        if (updatedEvent) {
+          form.reset();
+          router.push(`/gigs/${updatedEvent._id}`);
         }
       } catch (e) {
         console.log(e);
