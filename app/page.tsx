@@ -1,6 +1,8 @@
+import Collection from "@/components/Collection";
 import Footer from "@/components/Footer";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { getAllEvents } from "@/lib/actions/event.action";
 import { ArrowDownToLine, CheckCircle, Leaf } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,7 +27,14 @@ const perks = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const gigs = await getAllEvents({
+    query: "",
+    category: "",
+    page: 1,
+    limit: 6,
+  });
+
   return (
     <>
       <MaxWidthWrapper>
@@ -48,20 +57,29 @@ export default function Home() {
         </div>
 
         {/* lsit products */}
-      </MaxWidthWrapper>
+        <section
+          id="events"
+          className="wrapper my-8 flex flex-col gap-8 md:gap-12"
+        >
+          <h2 className="font-semibold  tracking-tight text-gray-600 md:font-bold text-3xl ">
+            Trusted by <br /> <span className="text-blue-600">Thousands</span>{" "}
+            of companies
+          </h2>
+          <div className="flex w-full flex-col gap-5 md:flex-row">
+            search category
+          </div>
+        </section>
 
-      <section
-        id="events"
-        className="wrapper my-8 flex flex-col gap-8 md:gap-12"
-      >
-        <h2 className="font-semibold  tracking-tight text-gray-600 md:font-bold text-3xl ">
-          Trusted by <br /> <span className="text-blue-600">Thousands</span> of
-          companies
-        </h2>
-        <div className="flex w-full flex-col gap-5 md:flex-row">
-          search category
-        </div>
-      </section>
+        <Collection
+          data={gigs?.data}
+          emptyTitle="No Gigs Found"
+          emptyStateSubtext="Come back later"
+          collectionType="All_Events"
+          limit={6}
+          page={1}
+          totalPages={2}
+        />
+      </MaxWidthWrapper>
 
       <section className="border-t border-gray-200 bg-gray-50 bg-dotted-pattern">
         <MaxWidthWrapper className="py-20">
@@ -91,7 +109,6 @@ export default function Home() {
           </div>
         </MaxWidthWrapper>
       </section>
-      <Footer />
     </>
   );
 }

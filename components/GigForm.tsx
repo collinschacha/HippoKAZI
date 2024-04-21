@@ -160,7 +160,7 @@ const GigForm = ({ userId, type }: GigFormProps) => {
                 <FormControl>
                   <div>
                     <Input
-                      placeholder="Gig Location or Online"
+                      placeholder="Gig Location: Physical or Remote"
                       {...field}
                       className="input-field"
                     />
@@ -181,7 +181,7 @@ const GigForm = ({ userId, type }: GigFormProps) => {
                   <div>
                     <Input
                       type="number"
-                      placeholder="Price"
+                      placeholder="Price(USD)"
                       {...field}
                       className="input-field"
                     />
