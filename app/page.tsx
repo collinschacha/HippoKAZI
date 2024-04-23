@@ -6,6 +6,8 @@ import { getAllEvents } from "@/lib/actions/event.action";
 import { ArrowDownToLine, CheckCircle, Leaf } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import Search from "../components/Search";
+import { SearchParamProps } from "@/types";
 
 const perks = [
   {
@@ -27,11 +29,14 @@ const perks = [
   },
 ];
 
-export default async function Home() {
+export default async function Home({ searchParams }: SearchParamProps) {
+  const page = Number(searchParams?.page) || 1;
+  const searchText = (searchParams?.query as string) || "";
+  const category = (searchParams?.category as string) || "";
   const gigs = await getAllEvents({
-    query: "",
-    category: "",
-    page: 1,
+    query: searchText,
+    category: category,
+    page,
     limit: 6,
   });
 
@@ -49,7 +54,7 @@ export default async function Home() {
             our team to ensure highest quality
           </p>
           <div className="flex flex-col sm:flex-row  gap-4 mt-6">
-            <Link href="/products" className={buttonVariants()}>
+            <Link href="#trending" className={buttonVariants()}>
               Browse Trending
             </Link>
             <Button variant={"ghost"}>Our Quality Promise &rarr;</Button>
@@ -66,19 +71,20 @@ export default async function Home() {
             of companies
           </h2>
           <div className="flex w-full flex-col gap-5 md:flex-row">
-            search category
+            <Search />
           </div>
         </section>
-
-        <Collection
-          data={gigs?.data}
-          emptyTitle="No Gigs Found"
-          emptyStateSubtext="Come back later"
-          collectionType="All_Events"
-          limit={6}
-          page={1}
-          totalPages={2}
-        />
+        <section id="trending">
+          <Collection
+            data={gigs?.data}
+            emptyTitle="No Gigs Found"
+            emptyStateSubtext="Come back later"
+            collectionType="All_Events"
+            limit={6}
+            page={1}
+            totalPages={2}
+          />
+        </section>
       </MaxWidthWrapper>
 
       <section className="border-t border-gray-200 bg-gray-50 bg-dotted-pattern">

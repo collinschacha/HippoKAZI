@@ -25,26 +25,17 @@ export type IOrderItem = {
 };
 
 const OrderSchema = new Schema({
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  stripeId: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  totalAmount: {
-    type: String,
-  },
-  event: {
-    type: Schema.Types.ObjectId,
-    ref: "Event",
-  },
-  buyer: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
+  _id: { type: Schema.Types.ObjectId, required: true },
+  event: { type: Schema.Types.ObjectId, required: true },
+  buyer: { type: Schema.Types.ObjectId, required: true },
+  stripeId: { type: String, default: null, required: false },
+
+  price: { type: Number, required: true },
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  image: { type: String, required: true },
+  organizer: { type: Schema.Types.ObjectId, required: true },
+  createdAt: { type: Date, default: Date.now },
 });
 
 const Order = models.Order || model("Order", OrderSchema);

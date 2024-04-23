@@ -5,6 +5,7 @@ import Link from "next/link";
 import React from "react";
 import { DeleteConfirmation } from "./DeleteConfirmation";
 import { Gideon_Roman } from "next/font/google";
+import CheckoutButton from "./CheckoutButton";
 
 type CardProps = {
   gig: any;
@@ -60,6 +61,7 @@ const Card = ({ gig, hasOrderLink, hidePrice }: CardProps) => {
             </Link>
           )}
         </div>
+        <CheckoutButton event={gig} />
       </div>
     </div>
   );

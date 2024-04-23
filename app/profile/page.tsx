@@ -1,6 +1,7 @@
 import Collection from "@/components/Collection";
 import { Button } from "@/components/ui/button";
 import { getEventsByUser } from "@/lib/actions/event.action";
+import { getOrders } from "@/lib/actions/order.action";
 import { auth } from "@clerk/nextjs";
 import Link from "next/link";
 
@@ -11,6 +12,8 @@ const page = async () => {
     userId: userId,
     page: 1,
   });
+  const orderedGigs = await getOrders(userId);
+  console.log(orderedGigs);
   return (
     <>
       <section className="bg-blue-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10 ">
@@ -26,9 +29,9 @@ const page = async () => {
         </div>
       </section>
 
-      {/* <section className="wrapper my-8 ">
+      <section className="wrapper my-8 ">
         <Collection
-          data={relatedGigs?.data}
+          data={orderedGigs?.data || []}
           emptyTitle="No Gigs Found"
           emptyStateSubtext="Order One"
           collectionType="My_Tickets"
@@ -37,7 +40,7 @@ const page = async () => {
           urlParamName="ordersPage"
           totalPages={2}
         />
-      </section> */}
+      </section>
 
       <section className="bg-blue-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10 ">
         <div className="Wrapper flex items-center justify-center sm:justify-between ">

@@ -7,6 +7,7 @@ import Image from "next/image";
 import { formatPrice } from "@/lib/utils";
 import { MapIcon } from "lucide-react";
 import Collection from "@/components/Collection";
+import CheckoutButton from "@/components/CheckoutButton";
 
 const GigDetails = async ({
   params: { id },
@@ -55,6 +56,7 @@ const GigDetails = async ({
               </div>
             </div>
             {/* checkout button */}
+            <CheckoutButton event={gig} />
 
             <div className="flex flex-col gap-5 ">
               <div className="flex gap-2 md:gap-3 ">
