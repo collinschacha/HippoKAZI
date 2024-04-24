@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI;
-
+export const dynamic = "force-dynamic";
 let cached = (global as any).mongoose || { conn: null, promise: null };
 export const connectToDatabase = async () => {
   if (cached.conn) return cached.conn;

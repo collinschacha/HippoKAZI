@@ -1,5 +1,6 @@
 import GigForm from "@/components/GigForm";
 import { auth } from "@clerk/nextjs";
+export const dynamic = "force-dynamic";
 
 const page = () => {
   const { sessionClaims } = auth();
