@@ -16,7 +16,6 @@ import {
   GetEventsByUserParams,
   GetRelatedEventsByCategoryParams,
 } from "@/types";
-export const dynamic = "force-dynamic";
 
 const getCategoryByName = async (name: string) => {
   return Category.findOne({ name: { $regex: name, $options: "i" } });
