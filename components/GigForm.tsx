@@ -28,6 +28,7 @@ type GigFormProps = {
   event?: any;
   eventId?: string;
 };
+export const dynamic = "force-dynamic";
 
 const GigForm = ({ userId, type, event, eventId }: GigFormProps) => {
   const [files, setFiles] = useState<File[]>([]);
